@@ -1,13 +1,11 @@
-@extends('master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="app-main__inner">
 	<div class="row">
 	    <div class="col-md-12">
 	        <div class="main-card mb-3 card">
 	            <div class="card-header">
 	            	Signed File
-	            	 <a href="{{route('file_upload')}}" class="btn btn-primary" style="right: 50px;position: fixed;">Upload New File</a>
+	            	 <a href="<?php echo e(route('file_upload')); ?>" class="btn btn-primary" style="right: 50px;position: fixed;">Upload New File</a>
 	        	</div>
 				<!-- <div class="card-body">
 	            	<h5 class="card-title">List Of non signed File</h5>
@@ -19,12 +17,12 @@
 	                        </tr>
                         </thead>
                         <tbody>
-                        	@foreach($uploads as $key=>$upload)
+                        	<?php $__currentLoopData = $uploads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$upload): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 		                    <tr>
-		                        <td>{{$key + 1}}</td>
-		                        <td><a href="{{asset('/tempUpload/'.$upload->non_signed_file)}}" target="_blank">{{$upload->non_signed_file}}</td>
+		                        <td><?php echo e($key + 1); ?></td>
+		                        <td><a href="<?php echo e(asset('/tempUpload/'.$upload->non_signed_file)); ?>" target="_blank"><?php echo e($upload->non_signed_file); ?></td>
 		                    </tr>
-		                    @endforeach
+		                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div> -->
@@ -41,17 +39,17 @@
 	                        </tr>
                         </thead>
                         <tbody>
-                        	@foreach($uploads as $key=>$upload)
+                        	<?php $__currentLoopData = $uploads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$upload): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 		                    <tr>
-		                        <td>{{$key + 1}}</td>
-								<td><a href="{{asset('/tempUpload/'.$upload->non_signed_file)}}" target="_blank">{{$upload->non_signed_file}}</td>
+		                        <td><?php echo e($key + 1); ?></td>
+								<td><a href="<?php echo e(asset('/tempUpload/'.$upload->non_signed_file)); ?>" target="_blank"><?php echo e($upload->non_signed_file); ?></td>
 								<td>
-									<button id="{{$upload->id}}" onclick="Emsigner(this)" value="{{asset('/tempUpload/'.$upload->non_signed_file)}}" class="btn btn-primary">sign file</button>
+									<button id="<?php echo e($upload->id); ?>" onclick="Emsigner(this)" value="<?php echo e(asset('/tempUpload/'.$upload->non_signed_file)); ?>" class="btn btn-primary">sign file</button>
 								</td>
-		                        <td><a href="{{asset('storage/signedfile/'.$upload->file_name)}}" target="_blank">{{$upload->file_name}}</td>								
+		                        <td><a href="<?php echo e(asset('storage/signedfile/'.$upload->file_name)); ?>" target="_blank"><?php echo e($upload->file_name); ?></td>								
 								
 		                    </tr>
-		                    @endforeach
+		                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div>
@@ -59,8 +57,8 @@
 	    </div>
 	</div>
 </div>
-@endsection
-@section('js_scripts')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js_scripts'); ?>
 <script type="text/javascript">
 	
 	function Emsigner(element) {
@@ -82,7 +80,7 @@
         console.log(data);
 		id = id
         console.log('about to upload signed pdf');		
-		var CSRF_TOKEN = "{{csrf_token()}}";
+		var CSRF_TOKEN = "<?php echo e(csrf_token()); ?>";
 		var form_data = new FormData();
 		form_data.append('_token', CSRF_TOKEN);
 		form_data.append("signature", data);
@@ -113,4 +111,6 @@
         alert('Failed To sign: ' + error);
     }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\md\Desktop\digital signture\dsc-demo1\resources\views/pages/uploads/list.blade.php ENDPATH**/ ?>

@@ -1,18 +1,16 @@
-
-@extends('master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="app-main__inner">
 	<div class="row">
 	    <div class="col-md-12">
-            @include('message.flash')
+            <?php echo $__env->make('message.flash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	        <div class="main-card mb-3 card">
 	            <div class="card-header">
 	            	Upload File
 	           </div>
 	            <div class="card-body">
-	            	<form action="{{ route('temp.upload') }}" method="POST" id="fundsTransfer" enctype="multipart/form-data">
-                        {{csrf_field()}}
+	            	<form action="<?php echo e(route('temp.upload')); ?>" method="POST" id="fundsTransfer" enctype="multipart/form-data">
+                        <?php echo e(csrf_field()); ?>
+
                         <!-- <input name="signature" type="hidden" class="signedData"> -->
                         <div class="position-relative form-group">
                         	<label class="">Select File To Upload</label>
@@ -25,11 +23,13 @@
 
                         </div>
                      	<button class="btn btn-primary" type="submit" id="formSigning">Upload File</button>
-                        <a href="{{route('restart-emsigner')}}" class="btn btn-success" target="_blank">Restart EmSigner</a>
+                        <a href="<?php echo e(route('restart-emsigner')); ?>" class="btn btn-success" target="_blank">Restart EmSigner</a>
                 	</form>
 	            </div>
 	        </div>
 	    </div>
 	</div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\md\Desktop\digital signture\dsc-demo1\resources\views/pages/uploads/add.blade.php ENDPATH**/ ?>

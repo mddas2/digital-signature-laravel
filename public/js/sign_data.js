@@ -5,7 +5,7 @@ function getSignature(uniqueId,successCallBack,randomNo)
 	callApplet(msgText,successCallBack,randomNo);
 }
 
-function signPdf(inputFileUrl, successCallback, failureCallback) {
+function signPdf(inputFileUrl, id, successCallback, failureCallback) {
     var signParams = "emsigneraction=pdfsign\n" +
         "tbs=" + inputFileUrl +
         "\noutputpath=" +
@@ -18,7 +18,7 @@ function signPdf(inputFileUrl, successCallback, failureCallback) {
         "pageno=all\n" +
         "reason=test\n" +
         "location=Kathmandu";
-    callApplet(signParams, successCallback, failureCallback);
+    callApplet(signParams,id , successCallback, failureCallback);
 }
 
 function getSignatureForFormSigning(data, uniqueId,successCallBack,randomNo)
@@ -29,7 +29,7 @@ function getSignatureForFormSigning(data, uniqueId,successCallBack,randomNo)
 	callApplet(msgText,successCallBack,randomNo);
 }
 
-function callApplet(msgText,successCallBack,randomNo)
+function callApplet(msgText , id ,successCallBack,randomNo)
 {
 	if (connection == null) {
 		alert('Error , Try Again');
@@ -43,7 +43,7 @@ function callApplet(msgText,successCallBack,randomNo)
 	connection.onmessage = (e) => {
 		if (e.data.indexOf("subProtocol") == -1) {
 			var respData = e.data;
-			return successCallBack(respData);
+			return successCallBack(respData,id);
 		}
 	}
 }

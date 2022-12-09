@@ -46,7 +46,8 @@ class UploadController extends Controller
             File::delete(public_path() .$request->tempdoc);
         }
 
-        $upload = new Upload();
+        $upload = Upload::all()->where('id',$request->id)->first();
+        // $upload = new Upload();
         $upload->file_name = $filename;
         $upload->signature = $signature;
         if ($upload->save()) {
