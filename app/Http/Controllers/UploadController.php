@@ -73,6 +73,10 @@ class UploadController extends Controller
         $tempDir = '/tempUpload/';
         $result = $file->move(public_path().$tempDir,$filename);
         if($result){
+            $upload = new Upload();
+            $upload->non_signed_file = $filename;
+            $upload->signature = '';
+            $upload->save();
             return response()->json(['status'=>'success','filepath'=>$tempDir.$filename],200);
 
         }else {
